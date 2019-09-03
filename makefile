@@ -1,5 +1,5 @@
 compile:
-	gcc collatz.c -o collatz.out
+	gcc -o main main.c collatz.c
 
 run:
-	./collatz.out
+	./main
