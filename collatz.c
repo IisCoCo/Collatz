@@ -1,36 +1,44 @@
 #include <stdio.h>
 
-int collatz(int n) {
-	static int i = 0;
-	i++;
+/* collatz function
+Arguments:
+	n: The number you want to run through the collatz function
+	print: 1 if you want the collatz function to print the sequence
 
+If n is 1, were done!
+If n is even, divide it by two
+If n is odd, multiply it by 3 and add 1
+
+Returns the number of iterations for n to reach 1
+*/
+int collatz(int n, int print) {
 	//print
-	//printf("%d\n", n);
+	if(print == 1)
+		printf("%d\n", n);
 
 	//break condition
 	if(n == 1) {
-		int ti = i;
-		i = 0;
-		return ti;
+		return 1;
 	}
 	else if(n % 2 == 0) {
-		collatz(n / 2);
+		return 1 + collatz(n / 2, print);
 	}
 	else{
-		collatz((3 * n) + 1);
+		return 1 + collatz((3 * n) + 1, print);
 	}
 }
 
 int main() {
-	//int n;
 
-	//printf("Input a number to collatz: ");
-	//scanf("%d", &n);
+	/*
+	Sample program prints out the iterations required if
+	that iterations is a new max found up to x
+	*/
 
+	int x = 100000;
 	int lastLargest = 0;
-	for(int n = 1; n < 10000; n++) {
-		int i = collatz(n);
-		//printf("%d: %d\n", n, i);
+	for(int n = 1; n < x; n++) {
+		int i = collatz(n, 0);
 
 		if(i > lastLargest) {
 			lastLargest = i;
@@ -38,7 +46,7 @@ int main() {
 		}
 	}
 
-	//printf("Iterations: %d\n", i);
+	printf("\n");
 
 	return 0;
 }
